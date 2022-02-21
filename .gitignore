@@ -1,0 +1,12 @@
+**/.classpath
+**/.metadata/
+**/.settings/
+**/.project
+**/target
+**/.factorypath
+**/.iml
+**/.mvn
+.idea
+*.iml
+.rebel.xml
+.DS_STORE
