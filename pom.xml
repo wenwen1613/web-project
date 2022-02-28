@@ -12,9 +12,11 @@
     <module>nacos-provider</module>
     <module>nacos-consumer</module>
     <module>oops-rbac</module>
+      <module>oops-gateway</module>
+    <module>oops-web</module>
   </modules>
 
-  <name>web-project Maven Webapp</name>
+  <name>web-project</name>
 
   <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,6 +24,9 @@
       <spring-boot.version>2.4.4</spring-boot.version>
       <spring-cloud.version>2020.0.2</spring-cloud.version>
       <spring-cloud-alibaba.version>2020.0.RC1</spring-cloud-alibaba.version>
+      <lombok.version>1.18.20</lombok.version>
+      <fastjson.version>1.2.76</fastjson.version>
+      <hutool.version>5.7.1</hutool.version>
   </properties>
 
   <dependencyManagement>
@@ -50,6 +55,29 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.6</version>
+      </dependency>
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>${fastjson.version}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>cn.hutool</groupId>
+        <artifactId>hutool-all</artifactId>
+        <version>${hutool.version}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 

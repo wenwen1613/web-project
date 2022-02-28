@@ -1,0 +1,5 @@
+{
+  "auth.username.error": "用户名错误",
+  "null.pointer.error": "空指针异常",
+  "unknown.error": "未知异常"
+}
