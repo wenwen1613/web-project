@@ -23,9 +23,11 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = BizException.class)
     @ResponseBody
-    public ResponseResult bizExceptionHandler(HttpServletRequest req, BizException e){
+    public ResponseResult<?> bizExceptionHandler(HttpServletRequest req, BizException e){
         log.error("发生业务异常！原因是：{}",e.getErrorMsg());
-        return ResponseResult.error(e.getErrorCode(),e.getErrorMsg());
+        ResponseResult<?> result = ResponseResult.error(e.getErrorCode(),e.getErrorMsg());
+        result.setPath(req.getRequestURI());
+        return result;
     }
 
     /**
@@ -36,9 +38,11 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value =NullPointerException.class)
     @ResponseBody
-    public ResponseResult exceptionHandler(HttpServletRequest req, NullPointerException e){
+    public ResponseResult<?>  exceptionHandler(HttpServletRequest req, NullPointerException e){
         log.error("发生空指针异常！原因是:",e);
-        return ResponseResult.error(BizErrorCode.NULL_POINTER_ERROR);
+        ResponseResult<?> result = ResponseResult.error(BizErrorCode.NULL_POINTER_ERROR);
+        result.setPath(req.getRequestURI());
+        return result;
     }
 
 
@@ -50,8 +54,10 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value =Exception.class)
     @ResponseBody
-    public ResponseResult exceptionHandler(HttpServletRequest req, Exception e){
+    public ResponseResult<?>  exceptionHandler(HttpServletRequest req, Exception e){
         log.error("未知异常！原因是:",e);
-        return ResponseResult.error(BizErrorCode.NULL_POINTER_ERROR);
+        ResponseResult<?> result = ResponseResult.error(BizErrorCode.NULL_POINTER_ERROR);
+        result.setPath(req.getRequestURI());
+        return result;
     }
 }

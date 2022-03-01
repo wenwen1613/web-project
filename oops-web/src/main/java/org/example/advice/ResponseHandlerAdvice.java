@@ -27,7 +27,7 @@ public class ResponseHandlerAdvice implements ResponseBodyAdvice {
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
         //如果body为空，返回默认信息
-        ResponseResult result = ResponseResult.success(o);
+        ResponseResult<?> result = ResponseResult.success(o);
         result.setPath(serverHttpRequest.getURI().getPath());
         if (o == null) {
             return ResponseResult.success(null);
@@ -37,7 +37,6 @@ public class ResponseHandlerAdvice implements ResponseBodyAdvice {
         }
         //匹配ResponseResult
         if (o instanceof ResponseResult) {
-            ((ResponseResult<?>) o).setPath(serverHttpRequest.getURI().getPath());
             return o;
         }
         /**
