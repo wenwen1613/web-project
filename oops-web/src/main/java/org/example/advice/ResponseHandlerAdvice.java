@@ -3,6 +3,7 @@ package org.example.advice;
 import lombok.extern.slf4j.Slf4j;
 import org.example.entity.ResponseResult;
 import org.example.exception.BizException;
+import org.slf4j.MDC;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
@@ -14,6 +15,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 /**
  * @author jingwen.li
  * @date 2022/2/28
+ *
+ * 对返回结果统一处理
+ *
  */
 @Slf4j
 @RestControllerAdvice(basePackages = "org.example")
@@ -33,10 +37,12 @@ public class ResponseHandlerAdvice implements ResponseBodyAdvice {
             return ResponseResult.success(null);
         }
         if (o instanceof BizException){
+            removeMDC();
             return ResponseResult.error(((BizException) o).getErrorCode(), ((BizException) o).getErrorMsg());
         }
         //匹配ResponseResult
         if (o instanceof ResponseResult) {
+            removeMDC();
             return o;
         }
         /**
@@ -44,5 +50,11 @@ public class ResponseHandlerAdvice implements ResponseBodyAdvice {
          */
         return result;
 
+    }
+
+    private void removeMDC(){
+        String uuid = MDC.get("traceId");
+        log.info("remove requestId ({}) from logger", uuid);
+        MDC.remove("traceId");
     }
 }

@@ -14,6 +14,7 @@ import java.util.Date;
 @Data
 public class ResponseResult <T> implements Serializable {
 
+    private static final long serialVersionUID = 955446145503727049L;
     private Integer code;
 
     private String msg;

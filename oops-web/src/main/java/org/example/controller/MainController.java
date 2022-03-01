@@ -1,5 +1,7 @@
 package org.example.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.example.entity.User;
 import org.example.exception.BizErrorCode;
 import org.example.exception.BizException;
@@ -14,6 +16,7 @@ import java.util.List;
  * @author jingwen.li
  * @date 2022/2/28
  */
+@Api(value = "测试主类")
 @RestController
 public class MainController {
 
@@ -25,6 +28,7 @@ public class MainController {
         return list;
     }
 
+    @ApiOperation("用户信息")
     @GetMapping("/user/info")
     @ResponseBody
     public User userInfo(Integer userId, String name) {
